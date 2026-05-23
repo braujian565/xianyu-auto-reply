@@ -12,8 +12,11 @@ RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y curl ca-certificates \
+# 安装 curl、ca-certificates 以及 tzdata（用于时区设置）
+RUN apt-get update && apt-get install -y curl ca-certificates tzdata \
     && update-ca-certificates \
+    && ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    && echo 'Asia/Shanghai' > /etc/timezone \
     && rm -rf /var/lib/apt/lists/*
 
 # 复制项目源码
