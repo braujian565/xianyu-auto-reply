@@ -31,9 +31,10 @@ deps = tomllib.load(open('/app/backend-web/pyproject.toml','rb')).get('project',
 open('/tmp/requirements.txt','w').write('\n'.join(deps))" && \
     pip install --no-cache-dir -r /tmp/requirements.txt
 
+# 仅安装 chromium，跳过其他浏览器以减小镜像体积
 RUN python -m playwright install --with-deps chromium
 
-# 创建日志目录
+# 创建日志目录和上传目录
 RUN mkdir -p /app/backend-web/logs /app/static/uploads
 
 EXPOSE 8089
@@ -41,5 +42,7 @@ EXPOSE 8089
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONPATH=/app
 ENV TZ=Asia/Shanghai
+# 设置 Python 不生成 .pyc 缓存文件，保持容器内目录整洁
+ENV PYTHONDONTWRITEBYTECODE=1
 
 CMD ["python", "backend-web/main.py"]
