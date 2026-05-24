@@ -3,6 +3,8 @@
 本文档面向运维与部署人员，详细说明本项目的部署流程、依赖版本、环境变量、常用运维命令与故障排查方法。
 
 > **个人备注**：本仓库为个人学习使用的 fork，主要用于研究 WebSocket 接入与 AI 回复逻辑。如需正式部署请参考上游仓库 [zhinianboke/xianyu-auto-reply](https://github.com/zhinianboke/xianyu-auto-reply)。
+>
+> **学习记录**：目前重点研究 `websocket/` 目录下的闲鱼 IM 消息接入逻辑，以及 `common/` 中的 AI 回复调度机制。
 
 ## 交流群
 
@@ -107,9 +109,4 @@
 
 ## 二、Python 版本要求（重要）
 
-不同部署方式对 Python 版本要求**不一样**，请严格按照下表选择：
-
-| 部署方式 | Python 版本 | 说明 |
-| --- | --- | --- |
-| Docker 加密源码构建 | **不需要本机 Python** | 镜像内统一使用 Python 3.11 |
-| 本地源码运行（Windows） | **必须 Python 3
+不同部署方式对 Python 版本要求**不
