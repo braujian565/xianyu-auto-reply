@@ -33,6 +33,7 @@ open('/tmp/requirements.txt','w').write('\n'.join(deps))" && \
 
 # 仅安装 chromium，跳过其他浏览器以减小镜像体积
 # 注意：如果网络不稳定可以考虑设置 PLAYWRIGHT_DOWNLOAD_HOST 使用国内镜像
+# 个人备注：可通过 PLAYWRIGHT_DOWNLOAD_HOST=https://npmmirror.com/mirrors/playwright 加速下载
 RUN python -m playwright install --with-deps chromium
 
 # 创建日志目录和上传目录
@@ -47,5 +48,7 @@ ENV TZ=Asia/Shanghai
 ENV PYTHONDONTWRITEBYTECODE=1
 # 限制 asyncio 调试输出，生产环境建议设为0，本地调试可改为1
 ENV PYTHONASYNCIODEBUG=0
+# 本地调试时可开启此选项查看详细日志
+# ENV PYTHONASYNCIODEBUG=1
 
 CMD ["python", "backend-web/main.py"]
