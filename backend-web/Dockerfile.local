@@ -32,6 +32,7 @@ open('/tmp/requirements.txt','w').write('\n'.join(deps))" && \
     pip install --no-cache-dir -r /tmp/requirements.txt
 
 # 仅安装 chromium，跳过其他浏览器以减小镜像体积
+# 注意：如果网络不稳定可以考虑设置 PLAYWRIGHT_DOWNLOAD_HOST 使用国内镜像
 RUN python -m playwright install --with-deps chromium
 
 # 创建日志目录和上传目录
@@ -44,5 +45,7 @@ ENV PYTHONPATH=/app
 ENV TZ=Asia/Shanghai
 # 设置 Python 不生成 .pyc 缓存文件，保持容器内目录整洁
 ENV PYTHONDONTWRITEBYTECODE=1
+# 限制 asyncio 调试输出，生产环境建议设为0，本地调试可改为1
+ENV PYTHONASYNCIODEBUG=0
 
 CMD ["python", "backend-web/main.py"]
