@@ -7,6 +7,7 @@ from logging.handlers import RotatingFileHandler
 from typing import Optional
 
 
+# Using a more compact format for personal use — easier to read in terminal
 DEFAULT_LOG_FORMAT = (
     "%(asctime)s | %(levelname)-8s | %(name)s:%(funcName)s:%(lineno)d - %(message)s"
 )
@@ -15,7 +16,7 @@ DEFAULT_DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 
 def setup_logger(
     name: str,
-    level: str = "INFO",
+    level: str = "DEBUG",  # changed from INFO to DEBUG for easier local development
     log_file: Optional[str] = None,
     max_bytes: int = 10 * 1024 * 1024,  # 10 MB
     backup_count: int = 5,
